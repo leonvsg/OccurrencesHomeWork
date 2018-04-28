@@ -21,6 +21,7 @@ public class Writer implements AutoCloseable, Runnable{
     }
 
     public synchronized void write(String text) throws IOException {
+        if (text == null) return;
         fileWriter.write(text + "\r\n");
         fileWriter.flush();
         logger.debug("Предложение \"" + text + "\" записано в файл");
