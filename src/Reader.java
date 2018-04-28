@@ -22,16 +22,11 @@ public class Reader implements Runnable {
         this.words = words;
     }
 
-    public Reader(BlockingQueue<String> sentences, String source) {
-        this.sentences = sentences;
-        this.source = source;
-    }
-
     @Override
     public void run() {
         //TODO переделать
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getInputStream(source), "UTF-8"))){
-            StringBuffer sentence = new StringBuffer();
+            StringBuilder sentence = new StringBuilder();
             int i;
             while ((i = reader.read()) != -1){
                 char nextChar = (char) i;

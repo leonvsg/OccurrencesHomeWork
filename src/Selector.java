@@ -27,6 +27,7 @@ public class Selector implements Runnable {
                 }
             }
         }*/
+        //TODO оптимизировать
         String[] buf = sentence.replaceAll(PUNCTUATIONS_DELETE_REGEXP, "").toLowerCase().split(" ");
         for (String word : words)
             for (String s : buf)
