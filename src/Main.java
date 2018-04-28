@@ -11,11 +11,8 @@ public class Main {
     final static Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) throws FileNotFoundException {
-
         logger.info("Подготовительный этап");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-        scanner = new Scanner(new File("words.txt"));
+        Scanner scanner = new Scanner(new File("words.txt"));
         List<String> words = new ArrayList<>();
         while (scanner.hasNext())
             words.add(scanner.next());
@@ -24,9 +21,6 @@ public class Main {
         File folder = new File("text");
         File[] files = folder.listFiles();
         List<String> sources = new ArrayList<>();
-
-        sources.add("sggfjjd");
-
         for (File file : files) {
             sources.add("text/" + file.getName());
         }

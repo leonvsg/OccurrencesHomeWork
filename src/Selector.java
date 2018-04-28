@@ -36,8 +36,8 @@ public class Selector implements Runnable {
             for (String s : buf)
                 if (s.equals(word.toLowerCase())){
                     try {
-                        logger.debug("Предложение \"" + sentence + "\" содержит слово: " + word);
                         sentences.put(sentence);
+                        logger.debug("Предложение \"" + sentence + "\" содержит слово: " + word);
                         logger.debug("В шину положено предложение: " + sentence);
                         return;
                     } catch (InterruptedException e) {

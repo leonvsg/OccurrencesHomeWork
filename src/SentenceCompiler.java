@@ -20,8 +20,10 @@ public class SentenceCompiler {
     }
 
     private static void makeSourcesFiles(List<String> words) {
+        logger.debug("Создаем список файлов с предложениями");
         for (int i = 0; i < Settings.SOURCES_AMOUNT; i++) {
             try(FileWriter fileWriter = new FileWriter("text\\" + String.valueOf(i))){
+                logger.debug("Формируем файл №" + i);
                 int sentenceAmount = new Random().nextInt(Settings.SENTENCES_MAX_AMOUNT);
                 for (int j = 0; j < sentenceAmount; j++) {
                     StringBuilder sentence = new StringBuilder();
@@ -39,13 +41,16 @@ public class SentenceCompiler {
                     fileWriter.flush();
                     logger.debug("Следующее предложение записано в файл: " + sentence.toString());
                 }
+                logger.debug("Файл №" + i + " создан");
             } catch (IOException e) {
                 logger.error(e.getMessage());
             }
         }
+        logger.debug("Создание файлов с предложениями закончено");
     }
 
     private static void makeWordsFile(List<String> words) {
+        logger.debug("Создаем файл со словами");
         try(FileWriter fileWriter = new FileWriter("words.txt")){
             for (int i = 0; i < Settings.WORDS_AMOUNT; i++) {
                 fileWriter.write(words.get(new Random().nextInt(words.size())) + "\r\n");
@@ -54,9 +59,11 @@ public class SentenceCompiler {
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
+        logger.debug("Файл со словами создан");
     }
 
     private static List<String> getVocabulary() {
+        logger.debug("Формируем словарь");
         List<String> words = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File("en.txt"))) {
             while (scanner.hasNext()) {
@@ -72,6 +79,7 @@ public class SentenceCompiler {
         } catch (FileNotFoundException e) {
             logger.error(e.getMessage());
         }
+        logger.debug("Словарь сформирован");
         return words;
     }
 
