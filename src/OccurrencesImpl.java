@@ -16,15 +16,12 @@ public class OccurrencesImpl implements Occurrences {
         ExecutorService executor = Executors.newFixedThreadPool(THREADS_AMOUNT);
         BlockingQueue<String> sentences = new ArrayBlockingQueue<>(QUEUE_MAX_AMOUNT);
         try(Writer writer = new Writer(res, sentences)) {
-            Thread writerThread = new Thread(writer);
-            writerThread.start();
+            executor.submit(writer);
             for (String source : sources){
                 executor.submit(new Reader(sentences, source, words));
             }
             executor.shutdown();
             while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);
-            sentences.put("-1");
-            writerThread.join();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace(System.out);
         } catch (Exception e) {
