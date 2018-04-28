@@ -1,8 +1,14 @@
-import java.io.*;
-import java.util.concurrent.*;
+import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class OccurrencesImpl implements Occurrences {
 
+    private final static Logger logger = Logger.getLogger(OccurrencesImpl.class);
     private final static int THREAD_TIMEOUT = Settings.THREAD_TIMEOUT;
     private final static int THREADS_AMOUNT = Settings.READER_THREADS_AMOUNT;
     private final static int QUEUE_MAX_AMOUNT = Settings.MESSAGE_QUEUE_MAX_AMOUNT;
@@ -23,10 +29,9 @@ public class OccurrencesImpl implements Occurrences {
             executor.shutdown();
             while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace(System.out);
+            logger.error(e.getMessage());
         } catch (Exception e) {
-            System.out.println("Непредвиденная ошибка: " + e.getMessage());
-            e.printStackTrace(System.out);
+            logger.error("Непредвиденная ошибка: " + e.getMessage());
         }
     }
 }

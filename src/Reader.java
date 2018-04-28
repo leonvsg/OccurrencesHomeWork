@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.net.URL;
 import java.util.concurrent.BlockingQueue;
@@ -6,6 +8,7 @@ import java.util.concurrent.Executors;
 
 public class Reader implements Runnable {
 
+    private final static Logger logger = Logger.getLogger(Reader.class);
     private BlockingQueue<String> sentences;
     private String source;
     private final static int THREAD_TIMEOUT = Settings.THREAD_TIMEOUT;
@@ -24,6 +27,7 @@ public class Reader implements Runnable {
 
     @Override
     public void run() {
+        logger.info("Начинаем парсить файл: " + source);
         //TODO переделать
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getInputStream(source), "UTF-8"))){
             StringBuilder sentence = new StringBuilder();
@@ -52,10 +56,13 @@ public class Reader implements Runnable {
             }
             executor.shutdown();
             while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);
-        } catch (IOException | UnknownSourceType e) {
-            e.printStackTrace(System.out);
+            logger.info("Парсинг файла : " + source + " окончен");
+        } catch (IOException e) {
+            logger.error(e.getMessage());
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
+        } catch (UnknownSourceType e) {
+            logger.error("Неверно укказан источник данных (файл, http, ftp)\n" + e.getMessage());
         }
     }
 

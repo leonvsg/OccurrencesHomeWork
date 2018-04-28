@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,6 +10,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class SentenceCompiler {
+
+    private final static Logger logger = Logger.getLogger(SentenceCompiler.class);
 
     public static void main(String[] args) {
         List<String> words = getVocabulary();
@@ -33,10 +37,10 @@ public class SentenceCompiler {
                     sentence.append(" ");
                     fileWriter.write(sentence.toString());
                     fileWriter.flush();
-                    System.out.println("Следующее предложение записано в файл: " + sentence.toString());
+                    logger.debug("Следующее предложение записано в файл: " + sentence.toString());
                 }
             } catch (IOException e) {
-                e.printStackTrace(System.out);
+                logger.error(e.getMessage());
             }
         }
     }
@@ -48,7 +52,7 @@ public class SentenceCompiler {
                 fileWriter.flush();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
@@ -62,11 +66,11 @@ public class SentenceCompiler {
                         .replaceAll("\\pP", "")
                         .replaceAll("\n", "");
                 words.add(word);
-                System.out.println("Слово \"" + word + "\" добавлено в список");
+                logger.debug("Слово \"" + word + "\" добавлено в список");
                 scanner.next();
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace(System.out);
+            logger.error(e.getMessage());
         }
         return words;
     }

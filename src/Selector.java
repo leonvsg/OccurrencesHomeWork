@@ -1,7 +1,10 @@
+import org.apache.log4j.Logger;
+
 import java.util.concurrent.BlockingQueue;
 
 public class Selector implements Runnable {
 
+    private final static Logger logger = Logger.getLogger(Selector.class);
     private String sentence;
     private String[] words;
     private BlockingQueue<String> sentences;
@@ -33,10 +36,12 @@ public class Selector implements Runnable {
             for (String s : buf)
                 if (s.equals(word.toLowerCase())){
                     try {
-                        sentences.put(Thread.currentThread().getName() + ": " + sentence + "\r\n");
+                        logger.debug("Предложение \"" + sentence + "\" содержит слово: " + word);
+                        sentences.put(sentence);
+                        logger.debug("В шину положено предложение: " + sentence);
                         return;
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
                     }
                 }
     }

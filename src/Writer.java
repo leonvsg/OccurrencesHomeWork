@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
@@ -5,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Writer implements AutoCloseable, Runnable{
 
+    private final static Logger logger = Logger.getLogger(Writer.class);
     private FileWriter fileWriter;
     private BlockingQueue<String> sentences;
     private int queueTimeout;
@@ -18,8 +21,9 @@ public class Writer implements AutoCloseable, Runnable{
     }
 
     public synchronized void write(String text) throws IOException {
-        fileWriter.write(text);
+        fileWriter.write(text + "\r\n");
         fileWriter.flush();
+        logger.debug("Предложение \"" + text + "\" записано в файл");
     }
 
     @Override
@@ -33,11 +37,11 @@ public class Writer implements AutoCloseable, Runnable{
         try {
             while (str != null){
                 str = sentences.poll(queueTimeout, queueTimeoutTimeUnit);
+                logger.debug("Из шины получено предложение: \"" + str + "\"");
                 write(str);
-                System.out.print("В файл записано: " + str);
             }
         } catch (InterruptedException | IOException e) {
-            e.printStackTrace();
+            logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
         }
     }
 }
