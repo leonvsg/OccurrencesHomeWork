@@ -15,8 +15,9 @@ public class Settings {
     public final static boolean MULTI_THREAD_SELECTOR = false;
 
     //Sentence Compiler Settings
-    public final static int SENTENCES_MAX_AMOUNT = 300_000;
-    public final static int WORDS_AMOUNT = 100;
-    public final static int SOURCES_AMOUNT = 200;
+    public final static int SENTENCES_MAX_AMOUNT = 150_000;
+    public final static int WORDS_AMOUNT = 50;
+    public final static int SOURCES_AMOUNT = 10;
     public final static int SENTENCE_MAX_LENGTH = 15;
+    public final static int SENTENCE_COMPILER_THREADS_AMOUNT = 5;
 }
