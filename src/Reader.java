@@ -12,7 +12,7 @@ public class Reader implements Runnable {
     private BlockingQueue<String> sentences;
     private String source;
     private final static int THREAD_TIMEOUT = Settings.THREAD_TIMEOUT;
-    private final int THREAD_AMOUNT = Settings.SELECTOR_THREADS_AMOUNT;
+    private final static int THREAD_AMOUNT = Settings.SELECTOR_THREADS_AMOUNT;
     private ExecutorService executor;
     private String[] words;
 
@@ -86,9 +86,8 @@ public class Reader implements Runnable {
 
     private SourceType getSourceType(String source){
         if (source == null || source.isEmpty()) return null;
-        String[] buf = source.split(":");
-        if (buf[0].toLowerCase().equals("http") || buf[0].toLowerCase().equals("https")) return SourceType.HTTP;
-        if (buf[0].toLowerCase().equals("ftp")) return SourceType.FTP;
+        if (source.startsWith("http")) return SourceType.HTTP;
+        if (source.startsWith("ftp")) return SourceType.FTP;
         return SourceType.LOCAL_FILE;
     }
 

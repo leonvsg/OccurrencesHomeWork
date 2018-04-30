@@ -14,8 +14,8 @@ public class Settings {
     public final static String OBJECT_FORMAT_EXCEPTION_MESSAGE = "Значение аргумента не может быть null или пустым\n";
 
     //Sentence Compiler Settings
-    public static int SENTENCES_MAX_AMOUNT = 150_000;
+    public static int SENTENCES_MAX_AMOUNT = 300_000;
     public static int WORDS_AMOUNT = 100;
-    public static int SOURCES_AMOUNT = 150;
+    public static int SOURCES_AMOUNT = 200;
     public static int SENTENCE_MAX_LENGTH = 15;
 }

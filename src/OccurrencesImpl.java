@@ -12,6 +12,13 @@ public class OccurrencesImpl implements Occurrences {
     private final static int THREAD_TIMEOUT = Settings.THREAD_TIMEOUT;
     private final static int THREADS_AMOUNT = Settings.READER_THREADS_AMOUNT;
     private final static int QUEUE_MAX_AMOUNT = Settings.MESSAGE_QUEUE_MAX_AMOUNT;
+    private ExecutorService executor;
+    private BlockingQueue<String> sentences;
+
+    public OccurrencesImpl() {
+        executor = Executors.newFixedThreadPool(THREADS_AMOUNT);
+        sentences = new ArrayBlockingQueue<>(QUEUE_MAX_AMOUNT);
+    }
 
     @Override
     public void getOccurencies(String[] sources, String[] words, String res) throws IllegalArgumentException {
@@ -19,8 +26,6 @@ public class OccurrencesImpl implements Occurrences {
                 sources.length == 0 || words.length == 0 || res.isEmpty())
             throw new IllegalArgumentException(Settings.OBJECT_FORMAT_EXCEPTION_MESSAGE);
 
-        ExecutorService executor = Executors.newFixedThreadPool(THREADS_AMOUNT);
-        BlockingQueue<String> sentences = new ArrayBlockingQueue<>(QUEUE_MAX_AMOUNT);
         try(Writer writer = new Writer(res, sentences)) {
             executor.submit(writer);
             for (String source : sources){
