@@ -51,7 +51,6 @@ public class SentenceCompiler {
                 sentence.append(chars[new Random().nextInt(3)]);
                 sentence.append(" ");
                 writer.write(sentence.toString());
-                logger.debug("Следующее предложение записано в файл: " + sentence.toString());
             }
             logger.debug("Файл создан");
         } catch (IOException e) {
