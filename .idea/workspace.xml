@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="257d3797-bfa9-4db0-84a4-22a33b934ad1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SentenceCompiler.java" afterPath="$PROJECT_DIR$/src/SentenceCompiler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Settings.java" afterPath="$PROJECT_DIR$/src/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/log4j.properties" afterPath="$PROJECT_DIR$/src/log4j.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Settings.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="10" column="54" lean-forward="true" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
+            <state relative-caret-position="238">
+              <caret line="14" column="61" lean-forward="false" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -40,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SentenceCompiler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SentenceCompiler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SentenceCompiler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -348,7 +346,7 @@
       <workItem from="1524989217303" duration="627000" />
       <workItem from="1524991438921" duration="177000" />
       <workItem from="1524992736498" duration="6291000" />
-      <workItem from="1525120633095" duration="450000" />
+      <workItem from="1525120633095" duration="495000" />
     </task>
     <task id="LOCAL-00001" summary="Изменил условие завершения чтения консьюмером данных из блокирующей очереди.">
       <created>1524913494054</created>
@@ -406,11 +404,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525118067196</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Переписал компилятор строк на многопоточность">
+      <created>1525121108355</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1525121108356</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109978000" />
+    <option name="totallyTimeSpent" value="110023000" />
   </component>
   <component name="TodoView" selected-index="5">
     <todo-panel id="selected-file">
@@ -716,14 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="10" column="54" lean-forward="true" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SentenceCompiler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -734,6 +731,14 @@
             <element signature="method#makeWordsFile#0;class#SentenceCompiler#0" expanded="false" />
             <element signature="method#getVocabulary#0;class#SentenceCompiler#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="61" lean-forward="false" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
+          <folding />
         </state>
       </provider>
     </entry>
