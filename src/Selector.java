@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 public class Selector implements Runnable {
 
     private final static Logger logger = Logger.getLogger(Selector.class);
-    //private String sentence;
+    private String sentence;
     private String[] words;
     private BlockingQueue<String> sentences;
     private final static String PUNCTUATIONS_DELETE_REGEXP = "\\pP";
@@ -16,7 +16,26 @@ public class Selector implements Runnable {
         this.sentences = sentences;
     }
 
+    public Selector(String sentence, String[] words, BlockingQueue<String> sentences) {
+        this.words = words;
+        this.sentences = sentences;
+        this.sentence = sentence;
+    }
+
     public void select(String sentence) {
+        /*for (String word : words) {
+            String regexp = String.format(WORD_REGEXP, word);
+            if (sentence.matches(regexp)){
+                try {
+                    sentences.put(Thread.currentThread().getName() + ": " + sentence + "\r\n");
+                    return;
+                } catch (InterruptedException e) {
+                    e.printStackTrace(System.out);
+                }
+            }
+        }*/
+
+        //TODO оптимизировать
         String[] buf = sentence.replaceAll(PUNCTUATIONS_DELETE_REGEXP, "").toLowerCase().split(" ");
         for (String word : words)
             for (String s : buf)
@@ -34,18 +53,6 @@ public class Selector implements Runnable {
 
     @Override
     public void run() {
-        /*for (String word : words) {
-            String regexp = String.format(WORD_REGEXP, word);
-            if (sentence.matches(regexp)){
-                try {
-                    sentences.put(Thread.currentThread().getName() + ": " + sentence + "\r\n");
-                    return;
-                } catch (InterruptedException e) {
-                    e.printStackTrace(System.out);
-                }
-            }
-        }*/
-        //TODO оптимизировать
-
+        select(sentence);
     }
 }

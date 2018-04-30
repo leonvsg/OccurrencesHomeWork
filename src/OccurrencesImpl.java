@@ -12,6 +12,7 @@ public class OccurrencesImpl implements Occurrences {
     private final static int THREAD_TIMEOUT = Settings.THREAD_TIMEOUT;
     private final static int THREADS_AMOUNT = Settings.READER_THREADS_AMOUNT;
     private final static int QUEUE_MAX_AMOUNT = Settings.MESSAGE_QUEUE_MAX_AMOUNT;
+    private final static boolean MULTI_THREAD_SELECTOR_FLAG = Settings.MULTI_THREAD_SELECTOR;
     private ExecutorService executor;
     private BlockingQueue<String> sentences;
 
@@ -29,7 +30,7 @@ public class OccurrencesImpl implements Occurrences {
         try(Writer writer = new Writer(res, sentences)) {
             executor.submit(writer);
             for (String source : sources){
-                executor.submit(new Reader(sentences, source, words));
+                executor.submit(new Reader(sentences, source, words, MULTI_THREAD_SELECTOR_FLAG));
             }
             executor.shutdown();
             while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);

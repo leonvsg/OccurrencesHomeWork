@@ -12,6 +12,7 @@ public class Settings {
     public final static int MESSAGE_QUEUE_MAX_AMOUNT = 500_000;
     public final static String SOURCE_FORMAT_EXCEPTION_MESSAGE = "Неизвестный тип ресурса или ресурс недоступен\n";
     public final static String OBJECT_FORMAT_EXCEPTION_MESSAGE = "Значение аргумента не может быть null или пустым\n";
+    public final static boolean MULTI_THREAD_SELECTOR = false;
 
     //Sentence Compiler Settings
     public static int SENTENCES_MAX_AMOUNT = 300_000;

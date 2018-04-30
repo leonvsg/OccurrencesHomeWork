@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Reader implements Runnable {
 
@@ -15,15 +16,25 @@ public class Reader implements Runnable {
     private ExecutorService executor;
     private String[] words;
     private Selector selector;
+    private boolean multiThreadSelector;
 
     private enum SourceType{LOCAL_FILE, FTP, HTTP}
 
     public Reader(BlockingQueue<String> sentences, String source, String[] words) {
         this.sentences = sentences;
         this.source = source;
-        //executor = Executors.newFixedThreadPool(THREAD_AMOUNT);
         this.words = words;
         selector = new Selector(words, sentences);
+        multiThreadSelector = false;
+    }
+
+    public Reader(BlockingQueue<String> sentences, String source, String[] words, boolean multiThreadSelector) {
+        this.sentences = sentences;
+        this.source = source;
+        executor = Executors.newFixedThreadPool(THREAD_AMOUNT);
+        this.words = words;
+        selector = new Selector(words, sentences);
+        this.multiThreadSelector = multiThreadSelector;
     }
 
     @Override
@@ -47,8 +58,7 @@ public class Reader implements Runnable {
                     if (Character.isLowerCase(nextChar)){
                         sentence.append(nextChar);
                     } else {
-                        selector.select(sentence.toString());
-                        //executor.submit(new Selector(sentence.toString(), words, sentences));
+                        select(sentence.toString());
                         sentence.delete(0, sentence.length());
                         sentence.append(nextChar);
                     }
@@ -65,6 +75,14 @@ public class Reader implements Runnable {
             logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
         } catch (UnknownSourceType e) {
             logger.error("Неверно укказан источник данных (файл, http, ftp)\n" + e.getMessage());
+        }
+    }
+
+    private void select(String sentence) {
+        if (multiThreadSelector) {
+            executor.submit(new Selector(sentence, words, sentences));
+        } else {
+            selector.select(sentence.toString());
         }
     }
 

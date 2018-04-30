@@ -13,6 +13,10 @@ public class Writer implements AutoCloseable, Runnable{
     private int queueTimeout;
     private TimeUnit queueTimeoutTimeUnit;
 
+    public Writer(String fileName) throws IOException {
+        fileWriter = new FileWriter(fileName);
+    }
+
     public Writer(String fileName, BlockingQueue<String> sentences) throws IOException {
         fileWriter = new FileWriter(fileName);
         this.sentences = sentences;
