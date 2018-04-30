@@ -30,7 +30,8 @@ public class Main {
         long startTime = System.nanoTime();
         new OccurrencesImpl().getOccurencies(
                 sourcesArr,
-                wordsArr,
+                new String[]{"sdgffd", "ffdf", "wfrrf", "cdcd", "dc"},
+                //wordsArr,
                 "output.txt");
 
         long estimatedTime = System.nanoTime() - startTime;

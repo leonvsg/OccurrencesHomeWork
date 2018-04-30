@@ -5,16 +5,31 @@ import java.util.concurrent.BlockingQueue;
 public class Selector implements Runnable {
 
     private final static Logger logger = Logger.getLogger(Selector.class);
-    private String sentence;
+    //private String sentence;
     private String[] words;
     private BlockingQueue<String> sentences;
     private final static String PUNCTUATIONS_DELETE_REGEXP = "\\pP";
     private final static String WORD_REGEXP = ".*\\b%s\\b.*";
 
-    public Selector(String sentence, String[] words, BlockingQueue<String> sentences){
-        this.sentence = sentence;
+    public Selector(String[] words, BlockingQueue<String> sentences) {
         this.words = words;
         this.sentences = sentences;
+    }
+
+    public void select(String sentence) {
+        String[] buf = sentence.replaceAll(PUNCTUATIONS_DELETE_REGEXP, "").toLowerCase().split(" ");
+        for (String word : words)
+            for (String s : buf)
+                if (s.equals(word.toLowerCase())){
+                    try {
+                        sentences.put(sentence);
+                        logger.debug("Предложение \"" + sentence + "\" содержит слово: " + word);
+                        logger.debug("В шину положено предложение: " + sentence);
+                        return;
+                    } catch (InterruptedException e) {
+                        logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
+                    }
+                }
     }
 
     @Override
@@ -31,18 +46,6 @@ public class Selector implements Runnable {
             }
         }*/
         //TODO оптимизировать
-        String[] buf = sentence.replaceAll(PUNCTUATIONS_DELETE_REGEXP, "").toLowerCase().split(" ");
-        for (String word : words)
-            for (String s : buf)
-                if (s.equals(word.toLowerCase())){
-                    try {
-                        sentences.put(sentence);
-                        logger.debug("Предложение \"" + sentence + "\" содержит слово: " + word);
-                        logger.debug("В шину положено предложение: " + sentence);
-                        return;
-                    } catch (InterruptedException e) {
-                        logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
-                    }
-                }
+
     }
 }

@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.URL;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Reader implements Runnable {
 
@@ -15,14 +14,16 @@ public class Reader implements Runnable {
     private final static int THREAD_AMOUNT = Settings.SELECTOR_THREADS_AMOUNT;
     private ExecutorService executor;
     private String[] words;
+    private Selector selector;
 
     private enum SourceType{LOCAL_FILE, FTP, HTTP}
 
     public Reader(BlockingQueue<String> sentences, String source, String[] words) {
         this.sentences = sentences;
         this.source = source;
-        executor = Executors.newFixedThreadPool(THREAD_AMOUNT);
+        //executor = Executors.newFixedThreadPool(THREAD_AMOUNT);
         this.words = words;
+        selector = new Selector(words, sentences);
     }
 
     @Override
@@ -46,7 +47,8 @@ public class Reader implements Runnable {
                     if (Character.isLowerCase(nextChar)){
                         sentence.append(nextChar);
                     } else {
-                        executor.submit(new Selector(sentence.toString(), words, sentences));
+                        selector.select(sentence.toString());
+                        //executor.submit(new Selector(sentence.toString(), words, sentences));
                         sentence.delete(0, sentence.length());
                         sentence.append(nextChar);
                     }
