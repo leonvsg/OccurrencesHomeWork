@@ -13,28 +13,26 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         logger.info("Подготовительный этап");
         Scanner scanner = new Scanner(new File("words.txt"));
-        List<String> words = new ArrayList<>();
+        List<String> buffer = new ArrayList<>();
         while (scanner.hasNext())
-            words.add(scanner.next());
-        String[] wordsArr = new String[words.size()];
-        words.toArray(wordsArr);
+            buffer.add(scanner.next());
+        String[] words = new String[buffer.size()];
+        buffer.toArray(words);
+        buffer.clear();
         File folder = new File("text");
         File[] files = folder.listFiles();
-        List<String> sources = new ArrayList<>();
         for (File file : files) {
-            sources.add("text/" + file.getName());
+            buffer.add("text/" + file.getName());
         }
-        String[] sourcesArr = new String[sources.size()];
-        sources.toArray(sourcesArr);
-        logger.info("Подготовительный этап пройден, начинаем парсинг");
+        String[] sources = new String[buffer.size()];
+        buffer.toArray(sources);
+        logger.info("Подготовительный этап пройден");
         long startTime = System.nanoTime();
         new OccurrencesImpl().getOccurencies(
-                sourcesArr,
-                wordsArr,
+                sources,
+                words,
                 "output.txt");
-
         long estimatedTime = System.nanoTime() - startTime;
-        logger.info("Парсинг окончен");
         logger.info("Времени потрачено на обработку файлов: " + estimatedTime);
     }
 }

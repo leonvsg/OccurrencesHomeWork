@@ -27,6 +27,7 @@ public class OccurrencesImpl implements Occurrences {
                 sources.length == 0 || words.length == 0 || res.isEmpty())
             throw new IllegalArgumentException(Settings.OBJECT_FORMAT_EXCEPTION_MESSAGE);
 
+        logger.info("Начинаем парсинг файлов");
         try(Writer writer = new Writer(res, sentences)) {
             executor.submit(writer);
             for (String source : sources){
@@ -34,6 +35,7 @@ public class OccurrencesImpl implements Occurrences {
             }
             executor.shutdown();
             while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);
+            logger.info("Парсинг окончен");
         } catch (IOException | InterruptedException e) {
             logger.error(e.getMessage());
         } catch (Exception e) {

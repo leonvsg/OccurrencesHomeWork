@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="257d3797-bfa9-4db0-84a4-22a33b934ad1" name="Default" comment="Поправил логирование">
+    <list default="true" id="257d3797-bfa9-4db0-84a4-22a33b934ad1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OccurrencesImpl.java" afterPath="$PROJECT_DIR$/src/OccurrencesImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Reader.java" afterPath="$PROJECT_DIR$/src/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Selector.java" afterPath="$PROJECT_DIR$/src/Selector.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Settings.java" afterPath="$PROJECT_DIR$/src/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Writer.java" afterPath="$PROJECT_DIR$/src/Writer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,19 +23,45 @@
       <file leaf-file-name="Settings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Settings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="62" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
+            <state relative-caret-position="340">
+              <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SentenceCompiler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SentenceCompiler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="575">
+              <caret line="64" column="44" lean-forward="false" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
+              <folding>
+                <element signature="method#makeWordsFile#0;class#SentenceCompiler#0" expanded="false" />
+                <element signature="method#getVocabulary#0;class#SentenceCompiler#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="32" column="16" lean-forward="true" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+            <state relative-caret-position="459">
+              <caret line="33" column="30" lean-forward="false" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OccurrencesImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/OccurrencesImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="24" column="109" lean-forward="false" selection-start-line="24" selection-start-column="109" selection-end-line="24" selection-end-column="109" />
+              <folding>
+                <element signature="method#OccurrencesImpl#0;class#OccurrencesImpl#0" expanded="false" />
+                <element signature="method#getOccurencies#0;class#OccurrencesImpl#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -372,11 +395,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524954425608</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Добавил выбор для выборки предложений с вхождениями слов между многопоточной обработкой в отдельном пуле и обработкой в потоке чтения файла">
+      <created>1525114961341</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1525114961341</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105132000" />
+    <option name="totallyTimeSpent" value="105797000" />
   </component>
   <component name="TodoView" selected-index="5">
     <todo-panel id="selected-file">
@@ -389,6 +419,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -403,7 +434,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21083455" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21083455" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -462,14 +493,15 @@
     <MESSAGE value="Добавлено логирование" />
     <MESSAGE value="Поправил логирование" />
     <MESSAGE value="Убрал запись null writer'ом" />
-    <option name="LAST_COMMIT_MESSAGE" value="Убрал запись null writer'ом" />
+    <MESSAGE value="Добавил выбор для выборки предложений с вхождениями слов между многопоточной обработкой в отдельном пуле и обработкой в потоке чтения файла" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил выбор для выборки предложений с вхождениями слов между многопоточной обработкой в отдельном пуле и обработкой в потоке чтения файла" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="104" />
+      <option name="time" value="105" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -632,19 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SentenceCompiler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="64" column="44" lean-forward="false" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
-          <folding>
-            <element signature="method#main#0;class#SentenceCompiler#0" expanded="false" />
-            <element signature="method#makeSourcesFiles#0;class#SentenceCompiler#0" expanded="false" />
-            <element signature="method#makeWordsFile#0;class#SentenceCompiler#0" expanded="false" />
-            <element signature="method#getVocabulary#0;class#SentenceCompiler#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Writer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -680,27 +699,19 @@
             <element signature="method#Reader#1;class#Reader#0" expanded="false" />
             <element signature="method#run#0;class#Reader#0" expanded="false" />
             <element signature="method#select#0;class#Reader#0" expanded="false" />
-            <marker date="1525114803356" expanded="false" signature="3555:4130" ph="{...}" />
-            <marker date="1525114803356" expanded="false" signature="4183:4413" ph="{...}" />
-            <marker date="1525114803356" expanded="false" signature="4467:4557" ph="{...}" />
-            <marker date="1525114803356" expanded="false" signature="4511:4525" ph=" { " />
-            <marker date="1525114803356" expanded="false" signature="4540:4550" ph=" }" />
+            <marker date="1525114956070" expanded="false" signature="3556:4131" ph="{...}" />
+            <marker date="1525114956070" expanded="false" signature="4184:4414" ph="{...}" />
+            <marker date="1525114956070" expanded="false" signature="4468:4558" ph="{...}" />
+            <marker date="1525114956070" expanded="false" signature="4512:4526" ph=" { " />
+            <marker date="1525114956070" expanded="false" signature="4541:4551" ph=" }" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Settings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="62" lean-forward="false" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/OccurrencesImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+        <state relative-caret-position="255">
+          <caret line="24" column="109" lean-forward="false" selection-start-line="24" selection-start-column="109" selection-end-line="24" selection-end-column="109" />
           <folding>
             <element signature="method#OccurrencesImpl#0;class#OccurrencesImpl#0" expanded="false" />
             <element signature="method#getOccurencies#0;class#OccurrencesImpl#0" expanded="false" />
@@ -710,9 +721,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="32" column="16" lean-forward="true" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+        <state relative-caret-position="459">
+          <caret line="33" column="30" lean-forward="false" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Settings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SentenceCompiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="64" column="44" lean-forward="false" selection-start-line="64" selection-start-column="44" selection-end-line="64" selection-end-column="44" />
+          <folding>
+            <element signature="method#makeWordsFile#0;class#SentenceCompiler#0" expanded="false" />
+            <element signature="method#getVocabulary#0;class#SentenceCompiler#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
