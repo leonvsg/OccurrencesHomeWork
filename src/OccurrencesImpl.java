@@ -15,6 +15,7 @@ public class OccurrencesImpl implements Occurrences {
     private final static boolean MULTI_THREAD_SELECTOR_FLAG = Settings.MULTI_THREAD_SELECTOR;
     private ExecutorService executor;
     private BlockingQueue<String> sentences;
+    private Reader reader;
 
     public OccurrencesImpl() {
         executor = Executors.newFixedThreadPool(THREADS_AMOUNT);
@@ -28,13 +29,15 @@ public class OccurrencesImpl implements Occurrences {
             throw new IllegalArgumentException(Settings.OBJECT_FORMAT_EXCEPTION_MESSAGE);
 
         logger.info("Начинаем парсинг файлов");
+        reader = new Reader(sentences, words, MULTI_THREAD_SELECTOR_FLAG);
         try(Writer writer = new Writer(res, sentences)) {
             executor.submit(writer);
             for (String source : sources){
-                executor.submit(new Reader(sentences, source, words, MULTI_THREAD_SELECTOR_FLAG));
+                executor.submit(()->reader.read(source));
             }
             executor.shutdown();
             while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);
+            reader.close();
             logger.info("Парсинг окончен");
         } catch (IOException | InterruptedException e) {
             logger.error(e.getMessage());

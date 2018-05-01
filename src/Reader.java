@@ -6,39 +6,40 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Reader implements Runnable {
+public class Reader implements Runnable, AutoCloseable {
 
     private final static Logger logger = Logger.getLogger(Reader.class);
-    private BlockingQueue<String> sentences;
     private String source;
     private final static int THREAD_TIMEOUT = Settings.THREAD_TIMEOUT;
     private final static int THREAD_AMOUNT = Settings.SELECTOR_THREADS_AMOUNT;
-    private ExecutorService executor;
-    private String[] words;
-    private Selector selector;
+    private volatile ExecutorService executor;
+    private Selector<String> selector;
     private boolean multiThreadSelector;
 
     private enum SourceType{LOCAL_FILE, FTP, HTTP}
 
     public Reader(BlockingQueue<String> sentences, String source, String[] words) {
-        this.sentences = sentences;
-        this.source = source;
-        this.words = words;
-        selector = new Selector(words, sentences);
-        multiThreadSelector = false;
+        this(sentences, source, words, false);
     }
 
     public Reader(BlockingQueue<String> sentences, String source, String[] words, boolean multiThreadSelector) {
-        this.sentences = sentences;
         this.source = source;
         executor = Executors.newFixedThreadPool(THREAD_AMOUNT);
-        this.words = words;
-        selector = new Selector(words, sentences);
+        selector = new OccurrencesSelector(words, sentences);
         this.multiThreadSelector = multiThreadSelector;
     }
 
-    @Override
-    public void run() {
+    public Reader(BlockingQueue<String> sentences, String[] words) {
+        this(sentences, words, false);
+    }
+
+    public Reader(BlockingQueue<String> sentences, String[] words, boolean multiThreadSelector) {
+        executor = Executors.newFixedThreadPool(THREAD_AMOUNT);
+        selector = new OccurrencesSelector(words, sentences);
+        this.multiThreadSelector = multiThreadSelector;
+    }
+
+    public synchronized void read(String source) {
         logger.info("Начинаем парсить файл: " + source);
         //TODO переделать
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getInputStream(source), "UTF-8"))){
@@ -66,24 +67,28 @@ public class Reader implements Runnable {
                     sentence.append(nextChar);
                 }
             }
-            executor.shutdown();
-            while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);
             logger.info("Парсинг файла : " + source + " окончен");
         } catch (IOException e) {
             logger.error(e.getMessage());
-        } catch (InterruptedException e) {
-            logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
         } catch (UnknownSourceType e) {
             logger.error("Неверно укказан источник данных (файл, http, ftp)\n" + e.getMessage());
         }
     }
 
-    private void select(String sentence) {
-        if (multiThreadSelector) {
-            executor.submit(new Selector(sentence, words, sentences));
-        } else {
-            selector.select(sentence.toString());
-        }
+    @Override
+    public void close() throws Exception {
+        executor.shutdown();
+        while (!executor.isTerminated()) Thread.sleep(THREAD_TIMEOUT);
+    }
+
+    @Override
+    public void run() {
+        read(source);
+    }
+
+    private synchronized void select(String sentence) {
+        if (multiThreadSelector) executor.submit(() -> selector.select(sentence));
+        else selector.select(sentence);
     }
 
     private InputStream getInputStream(String source) throws UnknownSourceType, IOException {
