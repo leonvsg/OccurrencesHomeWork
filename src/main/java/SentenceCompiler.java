@@ -2,7 +2,6 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,18 +55,19 @@ public class SentenceCompiler {
         } catch (IOException e) {
             logger.error(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
     private static void makeWordsFile(List<String> words) {
         logger.debug("Создаем файл со словами");
-        try(FileWriter fileWriter = new FileWriter("words.txt")){
+        try (Writer writer = new Writer("words.txt")) {
             for (int i = 0; i < Settings.WORDS_AMOUNT; i++) {
-                fileWriter.write(words.get(new Random().nextInt(words.size())) + "\r\n");
-                fileWriter.flush();
+                writer.write(words.get(new Random().nextInt(words.size())) + "\r\n");
             }
         } catch (IOException e) {
+            logger.error(e.getMessage());
+        } catch (Exception e) {
             logger.error(e.getMessage());
         }
         logger.debug("Файл со словами создан");
