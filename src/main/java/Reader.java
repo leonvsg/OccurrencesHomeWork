@@ -21,11 +21,7 @@ public class Reader implements Runnable {
     private enum SourceType{LOCAL_FILE, FTP, HTTP}
 
     public Reader(BlockingQueue<String> sentences, String source, String[] words) {
-        this.sentences = sentences;
-        this.source = source;
-        this.words = words;
-        selector = new Selector(words, sentences);
-        multiThreadSelector = false;
+        this(sentences, source, words, false);
     }
 
     public Reader(BlockingQueue<String> sentences, String source, String[] words, boolean multiThreadSelector) {
@@ -82,7 +78,7 @@ public class Reader implements Runnable {
         if (multiThreadSelector) {
             executor.submit(new Selector(sentence, words, sentences));
         } else {
-            selector.select(sentence.toString());
+            selector.select(sentence);
         }
     }
 

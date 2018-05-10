@@ -1,6 +1,8 @@
+/.gradle
 /.idea
+/build
+/logs
 /out
 text/*
-/logs
 /output.txt
 /words.txt

@@ -47,6 +47,8 @@ public class Writer implements AutoCloseable, Runnable{
             }
         } catch (InterruptedException | IOException e) {
             logger.error("Выполнение потока " + Thread.currentThread().getName() + " прервано\n" + e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
     }
 }
